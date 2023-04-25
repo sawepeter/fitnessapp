@@ -8,7 +8,10 @@ const SearchExercises = () => {
 
 
   const handleSearch = async () => {
-    
+    if(search){
+      const exercisesData = await fetchData
+    }
+
   }
 
 
@@ -31,12 +34,12 @@ const SearchExercises = () => {
           borderRadius: '40px' }} 
           value={search} onChange={(e) => setSearch(e.target.value.toLowerCase())} placeholder="Search Exercises" type="text"/>
           <Button className="search-btn" sx={{ bgcolor: '#FF2625', color: '#fff', textTransform: 'none', width: { lg: '173px', xs: '80px'},
-          height: '56px', position: 'absolute', right: '0px', fontSize: { lg: '20px', xs: '14px' }}}>
+          height: '56px', position: 'absolute', right: '0px', fontSize: { lg: '20px', xs: '14px' } }} onClick={handleSearch}>
             Search
           </Button>
       </Box>
       <Box sx={{ position: 'relative', width: '100%', p: '20px'}}>
-        {/* <HorizontalScrollbar data={bodyParts} /> */}
+        <HorizontalScrollbar data={bodyParts} bodyParts setBodyPart={setBodyPart} bodyPart={bodyPart} />
       </Box>
     </Stack>
   )
