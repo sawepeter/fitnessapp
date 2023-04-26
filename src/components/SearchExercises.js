@@ -8,15 +8,25 @@ import { exerciseOptions, fetchData } from '../utils/fetchData';
 const SearchExercises = () => {
   const [search, setSearch] = useState('');
   const [bodyParts, setBodyParts] = useState([]);
+  const [exercises, setExercises] = useState([]);
 
 
   const handleSearch = async () => {
     if(search){
       try {
-        console.log("Button Clicke!!!");
-        console.log("Key" +process.env.REACT_APP_RAPID_API_KEY);
         const exercisesData = await fetchData('https://exercisedb.p.rapidapi.com/exercises', exerciseOptions);
-        console.log(exercisesData);
+        
+        const searchedExercises = exercisesData.filter(
+          (exercise) => exercise.name.toLowerCase().includes(search)
+          || exercise.target.toLowerCase().includes(search)
+          || exercise.equipment.toLowerCase().includes(search)
+          || exercise.bodyPart.toLowerCase().includes(search)
+        );
+
+        setSearch('');
+        setExercises(searchedExercises);
+
+        
       } catch (error){
         console.error(error);
       }  
