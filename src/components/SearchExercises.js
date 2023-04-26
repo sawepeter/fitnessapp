@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Button, Stack, TextField, Typography } from '@mui/material';
+import { SearchOffSharp } from '@mui/icons-material';
+
+import { exerciseOptions, fetchData } from '../utils/fetchData';
 
 
 const SearchExercises = () => {
@@ -9,7 +12,14 @@ const SearchExercises = () => {
 
   const handleSearch = async () => {
     if(search){
-      const exercisesData = await fetchData
+      try {
+        console.log("Button Clicke!!!");
+        console.log("Key" +process.env.REACT_APP_RAPID_API_KEY);
+        const exercisesData = await fetchData('https://exercisedb.p.rapidapi.com/exercises', exerciseOptions);
+        console.log(exercisesData);
+      } catch (error){
+        console.error(error);
+      }  
     }
 
   }
@@ -39,7 +49,7 @@ const SearchExercises = () => {
           </Button>
       </Box>
       <Box sx={{ position: 'relative', width: '100%', p: '20px'}}>
-        <HorizontalScrollbar data={bodyParts} bodyParts setBodyPart={setBodyPart} bodyPart={bodyPart} />
+        {/* <HorizontalScrollbar data={bodyParts} bodyParts setBodyPart={setBodyPart} bodyPart={bodyPart} /> */}
       </Box>
     </Stack>
   )
